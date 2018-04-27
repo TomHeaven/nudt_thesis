@@ -22,11 +22,42 @@
 
 # 用法
 
-+ 用texstudio打开 thesis.tex，设置封面相关个人信息，编译生成论文盲评版。thesis.tex包含data目录下的chap0X.tex文件为论文的各个章节。ref/refs.bib是参考文献。
++ 用texstudio打开 thesis.tex，设置封面相关个人信息，编译生成论文盲评版。thesis.tex包含data目录下的chap0X.tex文件为论文的各个章节。ref/refs.bib是参考文献。注意documentclass的第一个参数为`doctor`是博士论文，而为`master`则是硕士论文：
+
+```
+\documentclass[doctor,otf]{nudtpaper} % 博士论文
+```
 + 用texstudio打开 thesis_bind.tex，设置封面相关个人信息，编译生成论文盲评版。
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
++ word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
 
+# 字体
 
+使用此模板需要下载安装配套字体：[配套字体百度云下载](https://pan.baidu.com/s/1lT59XSvVppS46Ggry-EnaQ)
+
+# macOS 系统 TexStudio 内置 pdf 阅读器不显示中文的解决方案
+
+在使用模版过程中，macOS 操作系统上 texstudio 的内嵌 pdf 阅读器不显示文档的中文内容（其他 pdf 阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到 pdf 才能使 texstudio 内置 pdf 阅读器正确显示论文。将字体内嵌入 pdf 文件的命令如下：
+
+```
+pdf2ps  name.pdf  # pdf 转换成 ps 文件
+ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps 转换成 pdf 并嵌入字体
+```
+
+据此提出以下解决方案：
+
++ 在 texstudio 的“选项”->“构建”中勾选“显示高级选项”，并添加用户命令“embedfonts:embedfonts”：
+
+```
+pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
+```
++ 修改默认构建命令如下：
+
+```
+txs:///xelatex | txs:///embedfonts
+```
+
+点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
 
 # 致谢
 
@@ -37,4 +68,8 @@
 + sofoot
 
 在此表示感谢！
+
+# 免责声明
+
+本模板免费提供于同学们使用或修改，但 is provided "As IS"。使用本模板产生的任何问题作者不承担任何直接或者间接责任。但作者会尽力帮助有需要的同学解决问题。
 
