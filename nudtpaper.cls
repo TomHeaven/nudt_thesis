@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2018 by TomHeaven <hanlin_tan@nudt.edu.cn>
+%% Copyright (C) 2018 by Liu Benyuan <liubenyuan@gmail.com> & TomHeaven <hanlin_tan@nudt.edu.cn>
 %% 
 %% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3a
@@ -23,29 +23,29 @@
 %% To produce the documentation run the original source files ending with `.dtx'
 %% through LaTeX.
 %% 
-%% Thanks LiuBenYuan <liubenyuan@gmail.com> for maintainence.
+%% Any Suggestions : TomHeaven <hanlin_tan@nudt.edu.cn>
 %% Thanks Xue Ruini <xueruini@gmail.com> for the thuthesis class!
 %% Thanks sofoot for the original NUDT paper class!
 %% 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{nudtpaper}
-[2011/07/17 v2.2 NUDT paper template]
+[2017/06/15 v2.7 NUDT paper template]
 \newif\ifismaster\ismastertrue
-\newif\ifisttf\isttffalse
-\newif\ifisfz\isfzfalse
-\newif\ifisotf\isotffalse
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
 \DeclareOption{anon}{\isanontrue}
 \newif\ifistwoside\istwosidefalse
 \DeclareOption{twoside}{\istwosidetrue}
-\DeclareOption{ttf}{\isttftrue}
-\DeclareOption{fz}{\isfztrue}
-\DeclareOption{otf}{\isotftrue}
-\newif\ifisvista\isvistafalse
-\DeclareOption{vista}{\isvistatrue}
 \DeclareOption*{\PackageWarning{nudtpaper}{Unknown Option '\CurrentOption'}}
+\newif\ifisttf\isttffalse
+\newif\ifisotf\isotffalse
+\newif\ifisfz\isfzfalse
+\newif\ifisfandol\isfandolfalse
+\DeclareOption{ttf}{\isttftrue}
+\DeclareOption{otf}{\isotftrue}
+\DeclareOption{fz}{\isfztrue}
+\DeclareOption{fandol}{\isfandoltrue}
 \ProcessOptions\relax
 \RequirePackage{ifthen,calc}
 \ifistwoside
@@ -66,110 +66,118 @@
 \RequirePackage{tabularx}
 \RequirePackage{slashbox}
 \RequirePackage[neverdecrease]{paralist}
+\RequirePackage{enumitem}
 \RequirePackage{xcolor}
-% TomHeaven added to solve "LaTeX Error: Too many math alphabets used in version normal", for ubuntu 15.04
-\newcommand\hmmax{0}
-\newcommand\bmmax{0}
-
-% TomHeaven
-\newcommand\blankpage{%
-	\null
-	\thispagestyle{empty}%
-	\addtocounter{page}{-1}%
-	\newpage}
-
 \RequirePackage{amsmath,amssymb}
-\RequirePackage{txfonts}
 \RequirePackage[Symbolsmallscale]{upgreek}
 \interdisplaylinepenalty=2500
 \RequirePackage{bm}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-% \ RequirePackage[CJKnumber,CJKchecksingle,no-math]{xeCJK}
-% TomHeaven added to solve "undefined control sequence error: \CJKnumber" and more, for ubuntu 15.04
-\RequirePackage[AutoFakeBold,AutoFakeSlant]{xeCJK}
-\RequirePackage{CJKnumb}
-
+\RequirePackage[CJKchecksingle,no-math]{xeCJK}
+\RequirePackage{zhnumber}
 \RequirePackage{indentfirst}
 \RequirePackage[numbers,sort&compress,square]{natbib}
 \RequirePackage[colorlinks=true,linkcolor=blue,citecolor=red,pdfborder=0 1 1]{hyperref}
+\RequirePackage{datetime}
 \defaultfontfeatures{Mapping=tex-text}
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
-\newcommand\installTTF{%
-  \setmainfont{Times New Roman}
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \ifisvista
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-    \setCJKmonofont{KaiTi} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong}
-    \setCJKfamilyfont{kai}{KaiTi}
-  \else
-    \setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi_GB2312}]{SimSun}
-    \setCJKmonofont{KaiTi_GB2312} % Pluto use LiSu Thu use Kaiti, orig is SimSun
-    \setCJKfamilyfont{fs}{FangSong_GB2312}
-    \setCJKfamilyfont{kai}{KaiTi_GB2312}
-  \fi
-  \setCJKsansfont{SimHei}
-  \setCJKfamilyfont{song}{SimSun}
-  \setCJKfamilyfont{hei}{SimHei}
-  \setCJKfamilyfont{li}{LiSu}
-  \setCJKfamilyfont{you}{YouYuan}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+\newcommand{\installttf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Office Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+    \setCJKsansfont{SimHei} % Hei
+    \setCJKmonofont{FangSong} % Fangsong
+    %%%% alias
+    \setCJKfamilyfont{song}{SimSun}
+    \setCJKfamilyfont{hei}{SimHei}
+    \setCJKfamilyfont{fs}{FangSong} % fang-song
+    \setCJKfamilyfont{kai}{KaiTi} % Kai
+    \setCJKfamilyfont{times}{Times New Roman} % times
 }
-\newcommand\installOTF{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={Adobe Heiti Std},ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}
-  \setCJKsansfont{Adobe Heiti Std}
-  \setCJKmonofont{Adobe Kaiti Std}
-  \setCJKfamilyfont{song}{Adobe Song Std}
-  \setCJKfamilyfont{hei}{Adobe Heiti Std}
-  \setCJKfamilyfont{fs}{Adobe Fangsong Std}
-  \setCJKfamilyfont{kai}{Adobe Kaiti Std}
-  \setCJKfamilyfont{li}{Adobe Kaiti Std}
-  \setCJKfamilyfont{you}{Adobe Kaiti Std}
-  \setCJKfamilyfont{cusong}{STZhongsong}
+
+\newcommand{\installotf}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Adobe Family Fonts
+    \setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
+    \setCJKsansfont{Adobe Heiti Std} % Hei
+    \setCJKmonofont{Adobe Fangsong Std} % Fangsong
+    %%%% alias
+    \setCJKfamilyfont{song}{Adobe Song Std}
+    \setCJKfamilyfont{hei}{Adobe Heiti Std}
+    \setCJKfamilyfont{fs}{Adobe Fangsong Std} % fang-song
+    \setCJKfamilyfont{kai}{Adobe Kaiti Std} % Kai
+    \setCJKfamilyfont{times}{Times New Roman} % times
 }
-\newcommand\installFZ{%
-  \setmainfont{Times New Roman} % could be changed to "Times New Roman PS Std" !!
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
-  \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong_GB18030-Z01}
-  \setCJKsansfont{FZHei-B01} % Hei
-  \setCJKmonofont{FZKai-Z03} % Kai
-  \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
-  \setCJKfamilyfont{hei}{FZHei-B01}
-  \setCJKfamilyfont{fs}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{li}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{you}{FZKai-Z03} % Kai
-  \setCJKfamilyfont{cusong}{FZXiaoBiaoSong-B05} % 小标宋
+
+\newcommand{\installfz}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Founder Family Fonts
+    \setCJKmainfont[BoldFont={FZYaSong-DB-GBK}]{FZShuSong_GB18030-Z01}
+    \setCJKsansfont{FZHei-B01} % Hei
+    \setCJKmonofont{FZFangSong-Z02} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FZShuSong_GB18030-Z01}
+    \setCJKfamilyfont{hei}{FZHei-B01}
+    \setCJKfamilyfont{fs}{FZFangSong-Z02} % fang-song
+    \setCJKfamilyfont{kai}{FZKai-Z03} % Kai
+    \setCJKfamilyfont{times}{Times New Roman} % times
 }
-\newcommand{\cusong}{\CJKfamily{cusong}} % 中宋作为加粗宋体
+
+\newcommand{\installfandol}{
+    %%%% Windows Thesis Fonts
+    \setmainfont{Times New Roman}
+    \setsansfont{Arial}
+    \setmonofont{Courier New}
+    %%%% Using Fandol Family Fonts
+    \setCJKmainfont{FandolSong}
+    \setCJKsansfont{FandolHei} % Hei
+    \setCJKmonofont{FandolFang} % fs
+    %%%% alias
+    \setCJKfamilyfont{song}{FandolSong}
+    \setCJKfamilyfont{hei}{FandolHei}
+    \setCJKfamilyfont{fs}{FandolFang} % fang-song
+    \setCJKfamilyfont{kai}{FandolKai} % Kai
+    \setCJKfamilyfont{times}{Times New Roman} % times
+}
+
 \ifisttf
-  \installTTF
-\else
-  \ifisfz
-    \installFZ
-  \else
-    \installOTF
-  \fi
+\installttf
 \fi
-\newcommand{\song}{\CJKfamily{song}}    % 宋体
-\newcommand{\fs}{\CJKfamily{fs}}        % 仿宋体
-\newcommand{\kai}{\CJKfamily{kai}}      % 楷体
-\newcommand{\hei}{\CJKfamily{hei}}      % 黑体
-\newcommand{\li}{\CJKfamily{li}}        % 隶书
-\newcommand{\you}{\CJKfamily{you}}      % 幼圆
+
+\ifisotf
+\installotf
+\fi
+
+\ifisfz
+\installfz
+\fi
+
+\ifisfandol
+\installfandol
+\fi
+
+\newcommand{\cusong}{\bfseries}
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋体
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
+\newcommand{\timesnr}{\CJKfamily{times}}   % times new roman
 \def\songti{\song}
 \def\fangsong{\fs}
 \def\kaishu{\kai}
 \def\heiti{\hei}
-\def\lishu{\li}
-\def\youyuan{\you}
 \newlength\thu@linespace
 \newcommand{\thu@choosefont}[2]{%
     \setlength{\thu@linespace}{#2*\real{#1}}%
@@ -198,7 +206,8 @@
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}} % 上标形式引用
 \newcommand{\china}{中华人民共和国}
 \def\nudtpaper{\textsc{Nudt}\textsc{Paper}}
-\newcommand{\pozhehao}{\kern0.3ex\rule[0.8ex]{2em}{0.1ex}\kern0.3ex}
+\newcommand{\pozhehao}{\kern0.2em\rule[0.8ex]{1.6em}{0.1ex}\kern0.2em}
+\newcommand{\xiaopozhe}{\kern0.2em\rule[0.8ex]{0.6em}{0.1ex}\kern0.2em}
 \renewcommand\contentsname{目\hspace{1em}录}
 \renewcommand\listfigurename{图\hspace{1em}目\hspace{1em}录}
 \renewcommand\listtablename{表\hspace{1em}目\hspace{1em}录}
@@ -209,9 +218,9 @@
 \renewcommand\figurename{图}
 \renewcommand\tablename{表}
 \renewcommand\appendixname{附录}
-\def\CJK@today{\CJKdigits{\the\year} 年 \CJKnumber{\the\month} 月}
-\newcommand\zhtoday{\CJK@today}
-\newcommand\entoday{\today{}}
+\def\CJK@today{\zhdigits{\the\year}年\zhnumber{\the\month}月}
+\renewcommand\zhtoday{\CJK@today}
+\newcommand\entoday{\monthname{}, \the\year}
 \geometry{top=21mm,bottom=25.5mm,left=30mm,right=30mm}
 \geometry{headheight=9mm,headsep=1mm,footskip=9mm}
 \renewcommand\setheadrule[1]{%
@@ -262,7 +271,7 @@
   \clearpage\fi\fi%
 }
 \titlecontents{chapter}[0pt]{\vspace{0.25\baselineskip} \heiti \xiaosi[1.25]}
-    {第\CJKnumber{\thecontentslabel}章\quad}{}
+    {第\zhnumber{\thecontentslabel}章\quad}{}
     {\hspace{.5em}\titlerule*{.}\contentspage}
 \titlecontents{section}[2em]{\songti \xiaosi[1.25]}
     {\thecontentslabel\quad}{}
@@ -308,7 +317,7 @@
 \newcommand\ckeywordsname{关键词}
 \newcommand\ckeywords[1]{{\hei\xiaosi \ckeywordsname: #1}}
 \newcommand\ekeywordsname{Key Words}
-\newcommand\ekeywords[1]{\textsf{\xiaosi \ekeywordsname: #1}}
+\newcommand\ekeywords[1]{\textbf{\textsf{\xiaosi \ekeywordsname: #1}}}
 \newenvironment{cabstract}{%
     \chapter{\cabstractname}
     \xiaosi
@@ -326,14 +335,14 @@
 \setlength{\topskip}{0pt}
 \setcounter{secnumdepth}{3}
 \setlength{\footnotesep}{2.2ex \@minus 2bp}
-\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\CJKnumber{\thechapter}章\,}{1em}{}
+\titleformat{\chapter}{\filcenter\sf \heiti\sanhao[1.25]}{第\zhnumber{\thechapter}章\,}{1em}{}
 \titleformat{\section}{\filcenter\bfseries \cusong\sihao[1.25]}{\thesection}{1em}{}
 \titleformat{\subsection}{\sf \heiti\xiaosi[1.25]}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\bfseries \cusong\xiaosi[1.25]}{\thesubsubsection}{1em}{}
 \titlespacing{\chapter}{0pt}{2.4ex-\topskip-\heightof{A}}{2.4ex \@minus 2bp}
 \titlespacing{\section}{0pt}{2ex-\heightof{a}}{2ex \@minus 2bp}
 \titlespacing{\subsection}{2em}{2ex \@minus 2bp}{2ex \@minus 2bp}
-\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{0ex \@minus 2bp}
+\titlespacing{\subsubsection}{2em}{1ex \@minus 2bp}{1ex \@minus 2bp}
 \renewcommand\normalsize{%
 \@setfontsize\normalsize{12bp}{12.87bp}%
 \renewcommand{\baselinestretch}{1.3}%
@@ -343,7 +352,6 @@
 \setlength\belowdisplayshortskip{\abovedisplayshortskip}%
 }
 \newlength\CJK@twochars
-\def\CJK@spaceChar{\Unicode{48}{7}}
 \def\CJKindent{%
   \settowidth\CJK@twochars{中国}%
   \parindent\CJK@twochars}
@@ -351,28 +359,23 @@
   \CJKindent\relax
   \checkparameter\relax
 }
-\setlength{\parskip}{0bp \@minus 2bp}
+\setlength{\parskip}{0bp \@minus 1bp}
 \newcommand*{\ziju}[1]{\renewcommand{\CJKglue}{\hskip #1}}
+\newlength\biblabelwd
+\settowidth\biblabelwd{\widthof{[999]}} % Maximum Ref Num = 999
 \renewenvironment{thebibliography}[1]{%
-   \chapter*{\bibname}%
-   \list{\@biblabel{\@arabic\c@enumiv}}%
-        {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{1.1cm}
-         \setlength{\labelsep}{0.4em}
-         \setlength{\itemindent}{0pt}
-         \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
-         \usecounter{enumiv}%
-         \let\p@enumiv\@empty
-         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-    \sloppy\frenchspacing
-    \clubpenalty4000%
-    \widowpenalty4000%
-    \interlinepenalty4000%
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}%
-    \endlist\frenchspacing}
+  \chapter*{\bibname}%
+  \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+  \begin{enumerate}[label={[\arabic{enumi}]},itemsep=0pt,parsep=0pt,labelindent=\CJK@twochars,labelwidth=\biblabelwd,leftmargin=0pt,itemindent=*,align=left]
+  \@openbib@code%
+  \sloppy\frenchspacing%
+  \clubpenalty4000%
+  \widowpenalty4000%
+  \interlinepenalty4000%
+  \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+     \end{enumerate}\frenchspacing}
 \setlength{\floatsep}{12bp}
 \setlength{\intextsep}{12bp}
 \setlength{\textfloatsep}{12bp}
@@ -380,15 +383,15 @@
 \setlength{\@fpsep}{12bp}
 \setlength{\@fpbot}{0bp}
 \renewcommand{\textfraction}{0.01}
-\renewcommand{\topfraction}{0.99}
-\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\topfraction}{0.98}
+\renewcommand{\bottomfraction}{0.98}
 \renewcommand{\floatpagefraction}{0.90}
-\clubpenalty            =   10000
-\widowpenalty           =   10000
-\displaywidowpenalty    =   10000
+\clubpenalty=5000
+\widowpenalty=5000
+\displaywidowpenalty=5000
 \let\old@tabular\@tabular
 \def\thu@tabular{\wuhao[1.25]\old@tabular}
-\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song #1~\rmfamily #2}}
+\DeclareCaptionLabelFormat{thu}{{\wuhao[1.25]\song#1~\rmfamily #2}}
 \DeclareCaptionLabelSeparator{thu}{\hspace{1em}}
 \DeclareCaptionFont{thu}{\wuhao[1.25]}
 \captionsetup{labelformat=thu,labelsep=thu,font=thu}
@@ -400,18 +403,18 @@
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \let\thu@LT@array\LT@array
 \def\LT@array{\thu@LT@array}
-\newenvironment{denotation}[1][2.5cm]{
-    \noindent\begin{list}{}%
+\newenvironment{denotation}[1][2.71828cm]{
+    \noindent\vskip-4bp\begin{list}{}%
     {\vskip-30bp\xiaosi[1.5]
-    \renewcommand\makelabel[1]{##1\hfil}
+    \renewcommand\makelabel[1]{\textbf{##1}\hfil}
     \setlength{\labelwidth}{#1} % 标签盒子宽度
     \setlength{\labelsep}{0cm} % 标签与列表文本距离
-    \setlength{\itemindent}{2em} % 标签缩进量
-    \setlength{\leftmargin}{\labelwidth+\labelsep} % 左边界
+    \setlength{\itemindent}{0em} % 标签缩进量
+    \setlength{\leftmargin}{\labelwidth+\labelsep+2em} % 左边界
     \setlength{\rightmargin}{0cm}
     \setlength{\parsep}{0cm} % 段落间距
     \setlength{\itemsep}{0cm} % 标签间距
-    \setlength{\listparindent}{0cm} % 段落缩进量
+    \setlength{\listparindent}{0pt} % 段落缩进量
     \setlength{\topsep}{0pt} % 标签与上文的间距
 }}{\end{list}}
 \newenvironment{ack}{%
@@ -433,11 +436,9 @@
 \theoremstyle{nonumberplain}
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
-\theoremsymbol{\ensuremath{\blacksquare}}
 \theoremseparator{:\,}
 \newtheorem{proof}{证明}[chapter]
 \newtheorem{assumption}{假设}[chapter]
-\newtheorem{definition}{定义}[chapter]
 
 \renewtheoremstyle{plain}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ ##2\theorem@separator]}%
@@ -446,6 +447,7 @@
 \theorembodyfont{\kai\xiaosi[1.3]}
 \theoremheaderfont{\hei\xiaosi[1.3]}
 \theoremsymbol{}
+\newtheorem{definition}{定义}[chapter]
 \newtheorem{lemma}{引理}[chapter]
 \newtheorem{theorem}{定理}[chapter]
 \newtheorem{axiom}{公理}[chapter]
@@ -453,7 +455,7 @@
 \newtheorem{conjecture}{猜想}[chapter]
 \newtheorem{proposition}{命题}[chapter]
 \newtheorem{exercise}{练习}[section]
-\newtheorem{example}{例}[section]
+\newtheorem{example}{例}[chapter]
 \newtheorem{problem}{问题}[section]
 \newtheorem{remark}{注释}[section]
 \def\classification#1{\def\@classification{#1}} % 中图分类号
@@ -478,14 +480,13 @@
 \def\enpapertype#1{\def\@enpapertype{#1}} % Engineering, Science
 \def\optionpaperclass#1{\def\@optionpaperclass{#1}} % paperclass
 \def\optionpaperclassen#1{\def\@optionpaperclassen{#1}}
-\def\optionas#1{\def\@optionas{#1}} % Advisor OR Supervisor
+\def\optionas#1{\def\@optionas{#1}} % Supervisor
 \ifismaster
   \optionpaperclass{硕士}
   \optionpaperclassen{Master}
-  \optionas{Advisor}
+  \optionas{Supervisor}
 \else
   \optionpaperclass{博士}
-  %\optionpaperclassen{Doctor}
   \optionpaperclassen{Ph.D}
   \optionas{Supervisor}
 \fi
@@ -501,6 +502,7 @@
   \null
   \ifisanon%
   \author{}%
+  \serialno{}%
   \enauthor{}%
   \supervisor{}%
   \cosupervisor{}%
@@ -509,9 +511,6 @@
   \else\relax\fi%
   \pagenumbering{alph}% not display, for print only
   \thispagestyle{empty}%
-  
-  \vspace*{-0.75cm}
-  
   \begin{center}\leavevmode % 表格环境
   {\fangsong \wuhao[1.25]%
     \begin{tabular}{llcll}
@@ -529,22 +528,26 @@
   \vspace{45bp} %从WORD中得来
   {\heiti \sihao
     \begin{tabular}{cp{8cm}c}
-      \raisebox{-3.7ex}[0pt]{\ifismaster{硕\ 士}\else{博\ 士}\ 生\ 姓\ 名} &
+      \ifismaster
+      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{硕\hfill{}士\hfill{}生\hfill{}姓\hfill{}名}} &
+      \else
+      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{博\hfill{}士\hfill{}生\hfill{}姓\hfill{}名}} &
+      \fi
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@author}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{学\ \ 科\ \ 专\ \ 业} &
+        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{学\hfill{}科\hfill{}专\hfill{}业}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@subject}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{研\ \ 究\ \ 方\ \ 向} &
+        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{研\hfill{}究\hfill{}方\hfill{}向}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@researchfield}\hfil{}} & \\[3.2ex]
         \cline{2-2}
-      \raisebox{-3.7ex}[0pt]{指\ \ 导\ \ 教\ \ 师} &
+        \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{指\hfill{}导\hfill{}教\hfill{}师}} &
         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@supervisor}\hfil{}} & \\[3.2ex]
         \cline{2-2}
       \ifx\@cosupervisor\@empty\else
-       \raisebox{-3.7ex}[0pt]{协助指导教师} &
-         {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
-        \cline{2-2}
+      \raisebox{-3.7ex}[0pt]{\makebox[3cm][s]{协\hfill{}助\hfill{}指\hfill{}导\hfill{}教\hfill{}师}} &
+          {\fs \hfil\raisebox{-3.7ex}[0pt]{\@cosupervisor}\hfil{}} & \\[3.2ex]
+          \cline{2-2}
       \fi
     \end{tabular}
   }
@@ -557,25 +560,22 @@
   }
   \vspace{1mm}
   \cleardoublepage%
-  \blankpage
   \newpage
   \thispagestyle{empty}%
 
   \begin{center}\leavevmode
-  \vfill\bfseries
-  {\erhao[1.25] \@entitle \par}
-  {\sanhao[1.25]
-  \vfill\vfill\vfill\vfill\vfill\vfill
+  \vfill\bfseries 
+  {\bf \erhao[1.25] \@entitle \par   \vfill\vfill\vfill\vfill\vfill}
+  {\bf \sanhao[1.25] %调整与word一致
   \begin{tabular}{rl}
     Candidate:\ & {\textsf{\@enauthor}}\\
     \@optionas{}:\ & {\textsf{\@ensupervisor}}\\
     \ifx\@encosupervisor\@empty\else
-    {Associate Supervisor:} &
-       {\textsf{\@encosupervisor}} \\
+      Associate \@optionas{}:\ & {\textsf{\@encosupervisor}} \\
     \fi
   \end{tabular}}
-  \vfill\vfill\vfill\vfill
-  {\sanhao[1.5]
+  \vfill\vfill\vfill\vfill\vfill
+  {\bf \sanhao[1.5] %调整与word一致
 A dissertation\\
 Submitted in partial fulfillment of the requirements\\
 for the degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
@@ -586,15 +586,15 @@ Defense Technology}\fi}\\
 ~\@endate~
   }
   \end{center}\vfill
+  
+\renewcommand{\baselinestretch}{1.5}%
+
+\ifisanon{~}\else{
   \cleardoublepage%
-  \blankpage
   \newpage
   \thispagestyle{empty}
-
-  {\cusong \xiaoer \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
-    \renewcommand{\baselinestretch}{1.5}%
+  {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
   {\fangsong\xiaosi %
-
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工作及取得的
 研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其
 他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或其它教育机
@@ -607,7 +607,7 @@ Defense Technology}\fi}\\
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\hspace{1cm}\par}
 
   \vspace*{2cm}
-  {\cusong \xiaoer \centering 学位论文版权使用授权书\par\vspace{2cm}}
+  {\cusong \erhao \centering 学位论文版权使用授权书\par\vspace{2cm}}
   {\fangsong\xiaosi %
 本人完全了解国防科技大学有关保留、使用学位论文的规定。本人授权国防
 科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子文档，允许
@@ -621,11 +621,11 @@ Defense Technology}\fi}\\
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par
 作者指导教师签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\par}
+}\fi
 
   \normalsize % normal, 正文开始
   \def\@tabular{\wuhao[1.25]\old@tabular} % 之后表格字体使用5号
   \cleardoublepage%
-  \blankpage
   \newpage
   \thispagestyle{empty}
 
