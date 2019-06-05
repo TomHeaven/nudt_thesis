@@ -34,7 +34,7 @@
 
 # 字体
 
-使用此模板需要下载安装配套字体：[配套字体百度云下载](https://pan.baidu.com/s/1lT59XSvVppS46Ggry-EnaQ)
+使用此模板需要下载安装配套字体：[配套字体下载](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.0/nudt_thesis.zip)
 
 # macOS 系统 TexStudio 内置 pdf 阅读器不显示中文的解决方案
 
