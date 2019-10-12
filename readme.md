@@ -4,6 +4,7 @@
 
 # 更新日志
 
+- 2019.10.12 更新原创性声明的格式；提供ttf和otf两种字体，ttf字体可以解决macOS上TexStudio内置pdf阅读器不显示中文的问题。
 - 2018.04.27 更新为二〇一八年三月版本格式
 - 2019.03.31 修正参考文献缩进格式；修正英文封面格式 （之前版本仅替换nudtpaper.cls和data/resume.tex）
 
@@ -21,24 +22,43 @@
 - Ubuntu 可以直接通过命令在线安装：`sudo apt-get install texlive-full`
 - macOS 安装方法：<http://www.tug.org/mactex/>
 
+
+# 依赖的字体
+
+使用此模板需要下载安装配套字体（二选一即可）：
+
++ [ttf字体下载(Windows字体，与Word一致)](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/ttf.zip)
+使用ttf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
+
+```
+\documentclass[doctor,ttf]{nudtpaper}   % ttf字体
+```
+
++ [otf字体下载（Adobe字体，更好看）](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/otf.zip)
+使用otf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
+
+```
+\documentclass[doctor,otf]{nudtpaper}   % otf字体
+```
+
 # 用法
 
 + 用texstudio打开 thesis.tex，设置封面相关个人信息，编译生成论文盲评版。thesis.tex包含data目录下的chap0X.tex文件为论文的各个章节。ref/refs.bib是参考文献。注意documentclass的第一个参数为`doctor`是博士论文，而为`master`则是硕士论文：
 
 ```
-\documentclass[doctor,otf]{nudtpaper} % 博士论文
+\documentclass[doctor,ttf]{nudtpaper} % 第一个参数表示博士论文，第二个参数表示ttf字体
 ```
 + 用texstudio打开 thesis_bind.tex，设置封面相关个人信息，编译生成论文盲评版。
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
 + word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
 
-# 字体
 
-使用此模板需要下载安装配套字体：[配套字体下载](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.0/nudt_thesis.zip)
 
-# macOS 系统 TexStudio 内置 pdf 阅读器不显示中文的解决方案
+# macOS 系统 TexStudio 内置 pdf 阅读器不显示中文
 
-在使用模版过程中，macOS 操作系统上 texstudio 的内嵌 pdf 阅读器不显示文档的中文内容（其他 pdf 阅读器可以正确显示），给编辑文档带来不便。经过实验发现，必须强制嵌入字体到 pdf 才能使 texstudio 内置 pdf 阅读器正确显示论文。将字体内嵌入 pdf 文件的命令如下：
+macOS系统中，TexStudio内置的pdf不显示otf字体（文档本身没有问题，其他阅读器可以正常显示）。解决方案有两种：
+1. 使用ttf字体。
+2. 强制嵌入字体到pdf。将字体内嵌入 pdf 文件的命令如下：
 
 ```
 pdf2ps  name.pdf  # pdf 转换成 ps 文件
