@@ -31,6 +31,8 @@
 \ProvidesClass{nudtpaper}
 [2017/06/15 v2.7 NUDT paper template]
 \newif\ifismaster\ismastertrue
+%\newif\ifismacos\ismacosfalse
+%\DeclareOption{macos}{\ismacostrue}
 \DeclareOption{master}{\ismastertrue}
 \DeclareOption{doctor}{\ismasterfalse}
 \newif\ifisanon\isanonfalse
@@ -84,42 +86,44 @@
 \xeCJKsetcharclass{"0}{"2E7F}{0}
 \xeCJKsetcharclass{"2E80}{"FFFF}{1}
 
-\newcommand{\installttf}{
-    %%%% Windows Thesis Fonts
+% ttf字体 (Windows)
+  \newcommand{\installttf}{
+    %%%%   Thesis Fonts
     \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
     %%%% Using Office Family Fonts
     \setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
     \setCJKsansfont{SimHei} % Hei
-    \setCJKmonofont{FangSong} % Fangsong
+    \setCJKmonofont{FangSong_GB2312} % Fangsong
     %%%% alias
     \setCJKfamilyfont{song}{SimSun}
     \setCJKfamilyfont{hei}{SimHei}
-    \setCJKfamilyfont{fs}{FangSong} % fang-song
+    \setCJKfamilyfont{fs}{FangSong_GB2312} % fang-song
     \setCJKfamilyfont{kai}{KaiTi} % Kai
     \setCJKfamilyfont{times}{Times New Roman} % times
 }
 
+% otf字体（Adobe）
 \newcommand{\installotf}{
-    %%%% Windows Thesis Fonts
-    \setmainfont{Times New Roman}
-    \setsansfont{Arial}
-    \setmonofont{Courier New}
-    %%%% Using Adobe Family Fonts
-    \setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
-    \setCJKsansfont{Adobe Heiti Std} % Hei
-    \setCJKmonofont{Adobe Fangsong Std} % Fangsong
-    %%%% alias
-    \setCJKfamilyfont{song}{Adobe Song Std}
-    \setCJKfamilyfont{hei}{Adobe Heiti Std}
-    \setCJKfamilyfont{fs}{Adobe Fangsong Std} % fang-song
-    \setCJKfamilyfont{kai}{Adobe Kaiti Std} % Kai
-    \setCJKfamilyfont{times}{Times New Roman} % times
+	%%%%   Thesis Fonts
+	\setmainfont{Times New Roman}
+	\setsansfont{Arial}
+	\setmonofont{Courier New}
+	%%%% Using Adobe Family Fonts
+	\setCJKmainfont[BoldFont={STZhongsong}]{Adobe Song Std}
+	\setCJKsansfont{Adobe Heiti Std} % Hei
+	\setCJKmonofont{Adobe Fangsong Std} % Fangsong
+	%%%% alias
+	\setCJKfamilyfont{song}{Adobe Song Std}
+	\setCJKfamilyfont{hei}{Adobe Heiti Std}
+	\setCJKfamilyfont{fs}{Adobe Fangsong Std} % fang-song
+	\setCJKfamilyfont{kai}{Adobe Kaiti Std} % Kai
+	\setCJKfamilyfont{times}{Times New Roman} % times
 }
 
 \newcommand{\installfz}{
-    %%%% Windows Thesis Fonts
+    %%%% Thesis Fonts
     \setmainfont{Times New Roman}
     \setsansfont{Arial}
     \setmonofont{Courier New}
@@ -593,8 +597,8 @@ Defense Technology}\fi}\\
   \cleardoublepage%
   \newpage
   \thispagestyle{empty}
-  {\cusong \erhao \centering \ziju{12pt} 独创性声明 \par\vspace{2cm}}
-  {\fangsong\xiaosi %
+  {\cusong \xiaoer \centering \ziju{12pt} 独创性声明 \par\vspace{0.5cm}}
+  {\fangsong\xiaosi[1.8] %
 本人声明所呈交的学位论文是我本人在导师指导下进行的研究工作及取得的
 研究成果。尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其
 他人已经发表和撰写过的研究成果，也不包含为获得国防科技大学或其它教育机
@@ -606,9 +610,9 @@ Defense Technology}\fi}\\
 学位论文作者签名：\hrulefill\hrulefill\hrulefill\hrulefill\hrulefill
   \hfill 日期：\hfill\hfill 年\hfill 月 \hfill 日\hspace{1cm}\par}
 
-  \vspace*{2cm}
-  {\cusong \erhao \centering 学位论文版权使用授权书\par\vspace{2cm}}
-  {\fangsong\xiaosi %
+  \vspace*{1.4cm}
+  {\cusong \xiaoer \centering 学位论文版权使用授权书\par\vspace{0.5cm}}
+  {\fangsong\xiaosi[1.8] %
 本人完全了解国防科技大学有关保留、使用学位论文的规定。本人授权国防
 科技大学可以保留并向国家有关部门或机构送交论文的复印件和电子文档，允许
 论文被查阅和借阅;可以将学位论文的全部或部分内容编入有关数据库进行检索，
@@ -630,6 +634,8 @@ Defense Technology}\fi}\\
   \thispagestyle{empty}
 
 } % QED
+
+
 \endinput
 %%
 %% End of file `nudtpaper.cls'.
