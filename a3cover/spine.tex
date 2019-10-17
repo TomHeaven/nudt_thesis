@@ -4,10 +4,15 @@
 \usepackage{graphicx}
 \usepackage[boldfont,slantfont,CJKnumber]{xeCJK}
 
-% 设定竖排字体，当前需要OTF字体！请参考说明文档进行下载
-\setmainfont{Adobe Garamond Pro}
-\setCJKmainfont{Adobe Song Std}
-\setCJKfamilyfont{vert}[RawFeature={vertical}]{Adobe Song Std}
+% 设定竖排字体，OTF字体
+%\setmainfont{Adobe Song Std}
+%\setCJKmainfont{Adobe Song Std}
+%\setCJKfamilyfont{vert}[RawFeature={vertical}]{Adobe Song Std}
+
+% 设定竖排字体，TTF字体
+\setmainfont{SimSun}
+\setCJKmainfont[BoldFont={STZhongsong}]{SimSun}
+\setCJKfamilyfont{vert}[RawFeature={vertical}]{SimSun}
 
 \newcommand{\envert}[1]{\raisebox{-.4em}{#1}}
 
