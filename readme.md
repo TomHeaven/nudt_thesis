@@ -34,6 +34,7 @@
 ```
 \documentclass[doctor,ttf]{nudtpaper}   % ttf字体
 ```
+注意Windows 10系统安装字体`不要双击字体安装`，这样只会为当前用户安装字体，latex可能还是无法找到字体。要右击字体文件，选`为所有用户安装字体`.
 
 + [otf字体下载（Adobe字体，更好看）](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/otf.zip)
 使用otf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
