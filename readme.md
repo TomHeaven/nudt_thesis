@@ -3,6 +3,7 @@
 本项目提供 NUDT 硕士博士论文Latex模板。
 
 # 更新日志
+- 2020.03.04 删除会议论文集论文(incproceeding)参考文献中多余的单词"In" （更新bstutf8.bst）
 - 2019.10.21 去掉交叉引用的颜色（更新mynudt.sty）
 - 2019.10.17 修正英文字体渲染效果与Word不一致的问题（主tex文件去掉lmodern宏包）；将英文摘要从“ABSTRACT”改为“Abstract”；修正a3cover的字体设置；模版默认使用ttf字体。
 - 2019.10.12 更新原创性声明的格式；提供ttf和otf两种字体，ttf字体可以解决macOS上TexStudio内置pdf阅读器不显示中文的问题。
