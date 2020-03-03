@@ -82,6 +82,23 @@ txs:///xelatex | txs:///embedfonts
 
 点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
 
+# 参考文献类别
+refs.bib中可用的参考文献类别有：
++ article: Article from a magazine or journal 【学术文章】
++ book: A published book   【书】
++ inbook: A part of a book (section, chapter and so on)  【书的一部分，无单独标题】
++ incollection: A part of a book having its own title        【书的一部分，有单独标题】
++ booklet: A work that is printed but have no publisher or sponsoring institution 【未出版的书】
++ conference: An article in a conference proceedings    【会议论文】
++ inproceedings: An article in a conference proceedings【会议论文集中的论文】
++ manual: Technical documentation                             【手册】
++ masterthesis: A Master’s thesis                                【硕士论文】
++ phdthesis: A PhD thesis                                           【博士论文】
++ proceedings: The same as conference                       【会议论文】
++ techreport: Report published by an institution             【技术报告】
++ unpublished: Document not formally published, with author and title  【未发表的文献】
++ misc: Something that doesn’t fit in any other type       【其他类别】
+
 # 致谢
 
 本模版修改自这些前辈们的工作：
