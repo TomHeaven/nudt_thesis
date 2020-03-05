@@ -3,7 +3,7 @@
 本项目提供 NUDT 硕士博士论文Latex模板。
 
 # 更新日志
-- 2020.03.04 删除会议论文集论文(incproceeding)参考文献中多余的单词"In" （更新bstutf8.bst）
+- 2020.03.04 删除会议论文集论文(inproceedings)参考文献中多余的单词"In" （更新bstutf8.bst）
 - 2019.10.21 去掉交叉引用的颜色（更新mynudt.sty）
 - 2019.10.17 修正英文字体渲染效果与Word不一致的问题（主tex文件去掉lmodern宏包）；将英文摘要从“ABSTRACT”改为“Abstract”；修正a3cover的字体设置；模版默认使用ttf字体。
 - 2019.10.12 更新原创性声明的格式；提供ttf和otf两种字体，ttf字体可以解决macOS上TexStudio内置pdf阅读器不显示中文的问题。
@@ -47,12 +47,12 @@
 
 # 用法
 
-+ 用texstudio打开 thesis.tex，设置封面相关个人信息，编译生成论文盲评版。thesis.tex包含data目录下的chap0X.tex文件为论文的各个章节。ref/refs.bib是参考文献。注意documentclass的第一个参数为`doctor`是博士论文，而为`master`则是硕士论文：
++ 用texstudio打开 thesis.tex，设置封面相关个人信息，编译生成论文明评版。thesis.tex包含data目录下的chap0X.tex文件为论文的各个章节。ref/refs.bib是参考文献。注意documentclass的第一个参数为`doctor`是博士论文，而为`master`则是硕士论文：
 
 ```
 \documentclass[doctor,ttf]{nudtpaper} % 第一个参数表示博士论文，第二个参数表示ttf字体
 ```
-+ 用texstudio打开 thesis_bind.tex，设置封面相关个人信息，编译生成论文盲评版。
++ 用texstudio打开 thesis_blind.tex，设置封面相关个人信息，编译生成论文盲评版。
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
 + word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
 
