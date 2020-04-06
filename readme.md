@@ -15,7 +15,7 @@
 # 编译环境
 推荐的编译环境如下：
 
-+ 编译器：Texlive 2016。
++ 编译器：Texlive 2015。`台式机上，Texlive2015从头编译100页的大论文仅需8秒，增量编译仅需3秒。但是Texlive2019的编译时间在10秒以上。其他版本未做测试。`
 + 编辑器：Texstudio。项目主页：[https://sourceforge.net/projects/texstudio](https://sourceforge.net/projects/texstudio)。Ubuntu可以直接通过命令在线安装：`sudo apt-get install texstudio`。其他操作系统需要从项目主页下载程序。
 
 ## Texlive 的安装方法
