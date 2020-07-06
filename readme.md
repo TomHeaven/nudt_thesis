@@ -28,7 +28,7 @@
 
 # 依赖的字体
 
-使用此模板需要下载安装配套字体（二选一即可）：
+使用此模板需要下载安装配套字体：
 
 + [ttf字体下载(Windows字体，与Word一致)](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/ttf.zip)
 使用ttf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
@@ -36,14 +36,8 @@
 ```
 \documentclass[doctor,ttf]{nudtpaper}   % ttf字体
 ```
-注意Windows 10系统安装字体`不要双击字体安装`，这样只会为当前用户安装字体，latex可能还是无法找到字体。要右击字体文件，选`为所有用户安装字体`.
+注意Windows 10系统安装字体`不要双击字体安装`，这样只会为当前用户安装字体，latex可能还是无法找到字体。要右击字体文件，选`为所有用户安装字体`。
 
-+ [otf字体下载（Adobe字体，更好看）](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/otf.zip)
-使用otf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
-
-```
-\documentclass[doctor,otf]{nudtpaper}   % otf字体
-```
 
 # 用法
 
@@ -53,36 +47,15 @@
 \documentclass[doctor,ttf]{nudtpaper} % 第一个参数表示博士论文，第二个参数表示ttf字体
 ```
 + 用texstudio打开 thesis_blind.tex，设置封面相关个人信息，编译生成论文盲评版。
++ 在thesis.tex / thesis_blind.tex 顶部的doucumentclass传入参数twoside可以生成打印版。该版本将插入必要的空白页，使得每一章的首页在奇数页面，支持直接双面打印。
+
+```
+\documentclass[doctor,ttf,twoside]{nudtpaper} 
+```
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
 + word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
 
 
-
-# macOS 系统 TexStudio 内置 pdf 阅读器不显示中文
-
-macOS系统中，TexStudio内置的pdf不显示otf字体（文档本身没有问题，其他阅读器可以正常显示）。解决方案有两种：
-1. 使用ttf字体。
-2. 强制嵌入字体到pdf。将字体内嵌入 pdf 文件的命令如下：
-
-```
-pdf2ps  name.pdf  # pdf 转换成 ps 文件
-ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps 转换成 pdf 并嵌入字体
-```
-
-据此提出以下解决方案：
-
-+ 在 texstudio 的“选项”->“构建”中勾选“显示高级选项”，并添加用户命令“embedfonts:embedfonts”：
-
-```
-pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
-```
-+ 修改默认构建命令如下：
-
-```
-txs:///xelatex | txs:///embedfonts
-```
-
-点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
 
 # 参考文献类别
 refs.bib中可用的参考文献类别有：
