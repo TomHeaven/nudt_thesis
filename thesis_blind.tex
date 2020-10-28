@@ -52,8 +52,8 @@
 \serialno{1605xxxx}
 \confidentiality{公开}
 \UDC{681}
-\title{Bayer图像联合去马赛克去噪关键技术研究}
-\displaytitle{Bayer图像联合去马赛克去噪关键技术研究}
+\title{基于先验模型与深度学习的图像去噪\\方法研究}
+\displaytitle{基于先验模型与深度学习的图像去噪方法研究}
 \author{谭同学}
 \zhdate{\zhtoday}
 \entitle{Joint Demosaicing and Denoising of Bayer Images}
@@ -89,6 +89,25 @@
 	
 	%书写正文，可以根据需要增添章节; 正文还包括致谢，参考文献与成果
 	\mainmatter
+	\renewcommand\UrlFont{\timesnr}
+	\makeatletter
+	\newcounter{blankpages}
+	\def\cleardoublepage{%
+		\clearpage
+		\if@twoside
+		\ifodd\c@page
+		\else
+		\hbox{}\newpage\stepcounter{blankpages}%
+		\thispagestyle{empty}%
+		\if@twocolumn\hbox{}\newpage\fi
+		\fi
+		\fi
+	}
+	\newcommand{\@romannoblank}[1]{%
+		\@roman{\numexpr#1-\value{blankpages}\relax}%
+	}
+	\makeatother
+	
 	\input{data/chap01}
 	\input{data/chap02}
 	

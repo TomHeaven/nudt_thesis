@@ -3,6 +3,7 @@
 本项目提供 NUDT 硕士博士论文Latex模板。
 
 # 更新日志
+-  2020.10.28 修复双面打印版(twoside)空页无页码、页眉的问题；修复\url字体与正文不统一的问题；个人成果部分增加注释提示。（更新thesis.tex，resume.tex）
 - 2020.03.04 删除会议论文集论文(inproceedings)参考文献中多余的单词"In" （更新bstutf8.bst）
 - 2019.10.21 去掉交叉引用的颜色（更新mynudt.sty）
 - 2019.10.17 修正英文字体渲染效果与Word不一致的问题（主tex文件去掉lmodern宏包）；将英文摘要从“ABSTRACT”改为“Abstract”；修正a3cover的字体设置；模版默认使用ttf字体。
@@ -52,37 +53,34 @@
 ```
 \documentclass[doctor,ttf]{nudtpaper} % 第一个参数表示博士论文，第二个参数表示ttf字体
 ```
-+ 用texstudio打开 thesis_blind.tex，设置封面相关个人信息，编译生成论文盲评版。
+注意：学位办要求评阅版论文（包括明评和盲评）“个人成果”部分隐去，并替换为一段文字：
+> 该论文作者在学期间取得的阶段性成果(学术论文等)已满足我校博士学位评 阅相关要求。为避免阶段性成果信息对专家评价学位论文本身造成干扰，特将论文作者的阶段性成果信息隐去。
+
+这需要手动修改resume.tex文件。
+
++ 设置封面信息时，\title中可以用双斜杠来控制封面页标题的换行位置，使得封面更加美观。\displaytitle中只填写标题纯文本，不要添加换行，否则会影响“独创性声明”页面的显示。例如：
+
+```
+\title{基于先验模型与深度学习的图像去噪\\方法研究}
+\displaytitle{基于先验模型与深度学习的图像去噪方法研究}
+```
+
++ **打印版**需在documentclass添加twside参数如下：
+
+```
+\documentclass[doctor,ttf,twoside]{nudtpaper} 
+```
+该版本可直接双面打印，无需再做页码调整。
+
++ 复制已经填好封面信息的thesis.tex文件为thesis_blind.tex文件，用texstudio打开 thesis_blind.tex，在documentclass处添加参数anon：
+
+```
+\documentclass[doctor,ttf,twoside,anon]{nudtpaper} 
+```
+编译生成论文盲评版thesis_blind.pdf
+
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
 + word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
-
-
-
-# macOS 系统 TexStudio 内置 pdf 阅读器不显示中文
-
-macOS系统中，TexStudio内置的pdf不显示otf字体（文档本身没有问题，其他阅读器可以正常显示）。解决方案有两种：
-1. 使用ttf字体。
-2. 强制嵌入字体到pdf。将字体内嵌入 pdf 文件的命令如下：
-
-```
-pdf2ps  name.pdf  # pdf 转换成 ps 文件
-ps2pdf14 -dPDFSETTINGS=/prepress name.ps # ps 转换成 pdf 并嵌入字体
-```
-
-据此提出以下解决方案：
-
-+ 在 texstudio 的“选项”->“构建”中勾选“显示高级选项”，并添加用户命令“embedfonts:embedfonts”：
-
-```
-pdf2ps %.pdf | ps2pdf14 -dPDFSETTINGS=/prepress %.ps | rm %.ps
-```
-+ 修改默认构建命令如下：
-
-```
-txs:///xelatex | txs:///embedfonts
-```
-
-点击"编译"按钮，则论文可以正确显示了。使用此方案前请确保 pdf2ps，ps2pdf14 命令在系统 PATH 中，并且可以正确执行。注意这个方案会使得 Adobe Acrobat 对pdf 的编辑能力下降，如果最终版本不需要嵌入字体，可以先还原默认构建命令为 XeLaTex，再编译提交。
 
 # 参考文献类别
 refs.bib中可用的参考文献类别有：
