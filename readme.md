@@ -3,7 +3,7 @@
 本项目提供 NUDT 硕士博士论文Latex模板。
 
 # 更新日志
--  2020.10.28 修复双面打印版(twoside)空页无页码、页眉的问题；修复\url字体与正文不统一的问题；个人成果部分增加注释提示。（更新thesis.tex，resume.tex）
+- 2020.10.28 修复双面打印版(twoside)空页无页码、页眉的问题；修复\url字体与正文不统一的问题；个人成果部分增加注释提示。（更新thesis.tex，resume.tex）
 - 2020.03.04 删除会议论文集论文(inproceedings)参考文献中多余的单词"In" （更新bstutf8.bst）
 - 2019.10.21 去掉交叉引用的颜色（更新mynudt.sty）
 - 2019.10.17 修正英文字体渲染效果与Word不一致的问题（主tex文件去掉lmodern宏包）；将英文摘要从“ABSTRACT”改为“Abstract”；修正a3cover的字体设置；模版默认使用ttf字体。
@@ -16,7 +16,7 @@
 # 编译环境
 推荐的编译环境如下：
 
-+ 编译器：Texlive 2016。
++ 编译器：Texlive 2015。`台式机上，Texlive2015从头编译100页的大论文仅需8秒，增量编译仅需3秒。但是Texlive2019的编译时间在10秒以上。其他版本未做测试。`
 + 编辑器：Texstudio。项目主页：[https://sourceforge.net/projects/texstudio](https://sourceforge.net/projects/texstudio)。Ubuntu可以直接通过命令在线安装：`sudo apt-get install texstudio`。其他操作系统需要从项目主页下载程序。
 
 ## Texlive 的安装方法
@@ -29,7 +29,7 @@
 
 # 依赖的字体
 
-使用此模板需要下载安装配套字体（二选一即可）：
+使用此模板需要下载安装配套字体：
 
 + [ttf字体下载(Windows字体，与Word一致)](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/ttf.zip)
 使用ttf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
@@ -37,14 +37,8 @@
 ```
 \documentclass[doctor,ttf]{nudtpaper}   % ttf字体
 ```
-注意Windows 10系统安装字体`不要双击字体安装`，这样只会为当前用户安装字体，latex可能还是无法找到字体。要右击字体文件，选`为所有用户安装字体`.
+注意Windows 10系统安装字体`不要双击字体安装`，这样只会为当前用户安装字体，latex可能还是无法找到字体。要右击字体文件，选`为所有用户安装字体`。
 
-+ [otf字体下载（Adobe字体，更好看）](https://github.com/TomHeaven/nudt_thesis/releases/download/v1.1/otf.zip)
-使用otf需要修改入口thesis.tex / thesis_blind.tex，确保documentclass的字体参数为
-
-```
-\documentclass[doctor,otf]{nudtpaper}   % otf字体
-```
 
 # 用法
 
@@ -64,15 +58,13 @@
 \title{基于先验模型与深度学习的图像去噪\\方法研究}
 \displaytitle{基于先验模型与深度学习的图像去噪方法研究}
 ```
-
-+ **打印版**需在documentclass添加twside参数如下：
++  在thesis.tex / thesis_blind.tex 顶部的doucumentclass传入参数twoside可以生成打印版。该版本将插入必要的空白页，使得每一章的首页在奇数页面，支持直接双面打印。
 
 ```
 \documentclass[doctor,ttf,twoside]{nudtpaper} 
 ```
-该版本可直接双面打印，无需再做页码调整。
 
-+ 复制已经填好封面信息的thesis.tex文件为thesis_blind.tex文件，用texstudio打开 thesis_blind.tex，在documentclass处添加参数anon：
++ 复制已经填好封面信息的thesis.tex文件为thesis\_blind.tex文件，用texstudio打开 thesis\_blind.tex，在documentclass处添加参数anon：
 
 ```
 \documentclass[doctor,ttf,twoside,anon]{nudtpaper} 
@@ -81,6 +73,7 @@
 
 + 用texstudio打开 a3cover目录下的 spine.tex，，设置封面相关个人信息，编译；再打开a3cover.tex，编译，可以得到A3纸论文封面。
 + word文件夹下有官方word模版，如果发现Latex模版有任何问题可以江湖救急。
+
 
 # 参考文献类别
 refs.bib中可用的参考文献类别有：
