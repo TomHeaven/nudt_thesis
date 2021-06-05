@@ -35,7 +35,7 @@
 %
 \documentclass[doctor,ttf,twoside]{nudtpaper}
 \usepackage{mynudt}
-\usepackage{multirow,array}
+\usepackage{multirow,array,makecell}
 
 \classification{TP391}
 \serialno{1605xxxx}
@@ -108,7 +108,8 @@
 \bibliographystyle{bstutf8}
 \bibliography{ref/refs}
 
-\input{data/resume}
+\input{data/resume}    %在学期间成果
+\input{data/reviewinfo} %公开评阅信息
 % 最后，需要的话还要生成附录，全文随之结束。
 \appendix
 \backmatter

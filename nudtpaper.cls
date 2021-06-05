@@ -434,6 +434,14 @@
     \xiaosi
     \@afterheading}
     {\par\vspace{2em}\par}
+\newenvironment{reviewinfo}{%
+	\chapter*{公开评阅信息}
+	\addcontentsline{toc}{chapter}{公开评阅信\\
+		息}
+	\xiaosi
+	\@afterheading}
+{\par\vspace{2em}\par}
+
 \renewtheoremstyle{nonumberplain}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ \theorem@separator]}%
 {\item[\hspace*{2em} \theorem@headerfont ##1\ (##3)\theorem@separator]}
