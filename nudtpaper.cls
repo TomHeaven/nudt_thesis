@@ -436,8 +436,7 @@
     {\par\vspace{2em}\par}
 \newenvironment{reviewinfo}{%
 	\chapter*{公开评阅信息}
-	\addcontentsline{toc}{chapter}{公开评阅信\\
-		息}
+	\addcontentsline{toc}{chapter}{公开评阅信息}
 	\xiaosi
 	\@afterheading}
 {\par\vspace{2em}\par}
