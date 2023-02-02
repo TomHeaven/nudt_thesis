@@ -587,7 +587,7 @@
   {\bf \sanhao[1.5] %调整与word一致
 A dissertation\\
 Submitted in partial fulfillment of the requirements\\
-for the degree of \textsf{\@optionpaperclassen{} of \@enpapertype}\\
+for the degree of \@optionpaperclassen{} of \textsf{\@enpapertype}\\
 in \textsf{\@ensubject}\\
 \makebox[\textwidth]{\ifisanon{~}\else{Graduate School of National University of %
 Defense Technology}\fi}\\
